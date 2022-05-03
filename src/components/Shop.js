@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from "react";
-import {Container, Row, ListGroup} from 'react-bootstrap';
+import {Container, Row} from 'react-bootstrap';
 import Product from './Product';
 import axios from "axios";
 import Cart from "./Cart";
+import { useSelector, useDispatch } from 'react-redux';
+import {setProductsState} from "./store/counterSlice";
 
 function Shop() {
-    const [products, setProducts] = useState([]);
+    const count = useSelector((state) => state.counter.value);
+    const products = useSelector(state => state.counter.products);
 
     useEffect(() => {
-        axios('https://restcountries.com/v2/all').then(data => {
-            setProducts([
+        axios('https://www.udemy.com/course/webdeveloper/learn/lecture/14899878#content').then(data => {
+            dispatch((setProductsState())[
                 {id: 1, brand: 'adidas', price: 120.00, model: 'Кросівки OZWEEGO', selected: false, wish: false,
                     imgSrc: 'https://assetmanagerpim-res.cloudinary.com/images/w_380/q_80/3c930598e8784957a410aa76010d8421_9366/EE6999_00_plp_standard.WebP'},
                 {id: 2, brand: 'adidas', price: 121.00, model: 'Кросівки OZWEEGO', selected: false, wish: false,
@@ -62,3 +65,4 @@ function Shop() {
 }
 
 export default Shop;
+
